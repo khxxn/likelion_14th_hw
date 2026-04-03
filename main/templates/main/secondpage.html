@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="profile-card">
+    <h1 class="my-name">구교현을 소개합니다</h1>
+
+    <div class="info-box">
+        <div class="info-title">소개</div>
+        <ul>
+            <li><strong>이름:</strong> {{ info.name }}</li>
+            <li><strong>별명:</strong> {{ info.nickname }}</li>
+            <li><strong>MBTI:</strong> {{ info.mbti }}</li>
+            <li><strong>취미:</strong> {{ info.hobby }}</li>
+            <li><strong>INSTA:</strong> {{ info.insta }}</li>
+
+        </ul>
+    </div>
+
+</div>
+
+{% endblock %}

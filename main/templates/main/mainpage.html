@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="profile-card">
+    <h1 class="my-name">구교현의 2주차 Django 학습 기록 🦁</h1>
+
+    <div class="info-box">
+        <img src="{% static 'images/flower.png' %}" alt="벚꽃" width="100%">
+    </div>
+    <div class="info-box">
+        <div class="info-title">🦁 1. Django MTV 패턴</div>
+        <ul>
+            <li>Model: 데이터의 정의 및 DB 조작을 담당함</li>
+            <li>Template: 사용자에게 보여지는 HTML 화면을 구성함</li>
+            <li>View: 요청에 따른 로직을 수행</li>
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <div class="info-title">🦁 2. View와 URL 연결</div>
+        <ul>
+            <li>View 작성: render(request, '경로/파일명.html', context)</li>
+            <li>URL 설정: urls.py에서 path() 함수를 사용하여 특정 주소와 View 함수를 연결</li>
+            <li>경로가 비어있는 ''은 유저가 처음 접속했을 때 보게 될 메인 페이지</li>
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <div class="info-title">🦁 3. Template Language</div>
+        <ul>
+            {% verbatim %}
+            <li>변수: {{ name }} -> 구교현</li>
+            <li>태그: {% for %}, {% if %} 반복문 조건문</li>
+            <li>필터: {{ name | upper }}</li>
+            {% endverbatim %}
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <div class="info-title">🦁 4. Template 상속 및 포함</div>
+        <ul>
+            {% verbatim %}
+            <li>상속: {% extends 'base.html' %}를 사용하여 공통 뼈대를 재사용함</li>
+            <li>Block: 부모의 {% block %} 영역 안에 자식 페이지의 내용을 채워 넣음</li>
+            <li>Include: {% include %}를 사용하여 네비바 등 반복되는 파일을 가져옴</li>
+            {% endverbatim %}
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <div class="info-title">🦁 5. 정적 파일 (Static Files)</div>
+        <ul>
+            {% verbatim %}
+            <li>CSS, 이미지 등 변하지 않는 파일을 static 폴더에 모아 관리함</li>
+            <li>HTML 최상단에 {% load static %}을 선언</li>
+            <li>settings.py에서 STATICFILES_DIRS STATIC_ROOT 경로 설정</li>
+            {% endverbatim %}
+        </ul>
+    </div>
+
+</div>
+
+{% endblock %}
