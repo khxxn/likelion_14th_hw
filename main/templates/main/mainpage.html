@@ -9,6 +9,14 @@
         <img src="{% static 'images/flower.png' %}" alt="벚꽃" width="100%">
     </div>
     <div class="info-box">
+        <div class="info-title">🦁 목차</div>
+        <ul>
+            {% for content in contents %}
+            <li>{{ content }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="info-box">
         <div class="info-title">🦁 1. Django MTV 패턴</div>
         <ul>
             <li>Model: 데이터의 정의 및 DB 조작을 담당함</li>

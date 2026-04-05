@@ -1,7 +1,16 @@
 from django.shortcuts import render
 
 def mainpage(request):
-    return render(request,'main/mainpage.html')
+    context = {
+        'contents' : [
+            ' 1. Django MTV 패턴',
+            '2. View와 URL 연결',
+            '3. Template Language',
+            '4. Template 상속 및 포함',
+            '5, 정적 파일'
+        ]
+    }
+    return render(request,'main/mainpage.html', context)
 
 def secondpage(request):
     context = {
