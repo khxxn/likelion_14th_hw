@@ -1,0 +1,14 @@
+from django.urls import path
+
+from . import views
+from .views import *
+
+app_name = 'main'
+urlpatterns = [
+    path('', mainpage, name="mainpage"),
+    path('second', secondpage, name="secondpage"),
+    path('new_post', new_post, name='new_post'),
+    path('create', create, name='create'),
+    path('post', postpage, name='postpage'),
+    path('detail/<int:post_id>', detail, name='detail')
+]

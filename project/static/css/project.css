@@ -70,3 +70,32 @@ ul {
 li {
     font-size: 18px;
 }
+
+.detail-header {
+    border-bottom: 2px solid #52a9ffab;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.detail-category {
+    color: #063acbcb;
+    font-size: 16px;
+}
+
+.detail-title {
+    margin: 0 0 15px 0;
+    font-size: 32px;
+}
+
+.detail-meta {
+    color: #606060;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-body {
+    min-height: 300px;
+    font-size: 17px;
+    line-height: 1.8;
+}

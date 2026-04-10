@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-card">
+    <h1 class="my-name">새 게시글 작성</h1>
+
+    <form action="{% url 'main:create' %}" method="POST">
+        {% csrf_token %}
+
+        <p>
+            <label for="title">제목: </label>
+            <input type="text" id="title" name="title" required>
+        </p>
+
+        <p>
+            <label for="writer">작성자: </label>
+            <input type="text" id="writer" name="writer" required>
+        </p>
+
+        <p>
+            <label for="content">내용: </label><br>
+            <textarea id="content" name="content" rows="15" cols="100" required></textarea>
+        </p>
+
+        <p>
+            <label for="pub_date">작성일: </label>
+            <input type="date" id="pub_date" name="pub_date" required>
+        </p>
+
+        <p>
+            <label for="category">카테고리: </label>
+            <select id="category" name="category" required style="padding: 5px;">
+                <option value="자유">자유</option>
+                <option value="공부">공부</option>
+                <option value="독서">독서</option>
+                <option value="일기">일기</option>
+            </select>
+        </p>
+
+        <button type="submit">게시글 생성</button>
+    </form>
+</div>
+
+{% endblock %}

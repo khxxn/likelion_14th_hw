@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="profile-card">
+
+    <div class="card-grid">
+        {% for post in posts %}
+        <div class="info-box">
+            <div class="info-title">
+                <span class="detail-category">[{{ post.category }}]</span>
+                {{ post.title }}
+            </div>
+
+            <div class="card-content">
+                <p>{{ post.summary }}</p>
+                <a href="{% url 'main:detail' post.id %}">자세히 보기</a>
+            </div>
+
+            <div class="detail-meta">
+                <span>작성자: {{ post.writer }}</span>
+                <span>조회수: {{ post.count }}</span>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

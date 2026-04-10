@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="profile-card" style="max-width: 800px; margin: 0 auto;">
+
+    <div class="info-box" style="padding: 40px; text-align: left;">
+
+        <div class="detail-header">
+            <div class="detail-category">
+                [{{ post.category }}]
+            </div>
+            <h1 class="detail-title">{{ post.title }}</h1>
+
+            <div class="detail-meta">
+                <span>작성자: {{ post.writer }} | 날짜: {{ post.pub_date|date:'Y-m-d H:i' }}</span>
+                <span>조회수: {{ post.count }}</span>
+            </div>
+        </div>
+
+        <div class="detail-body">
+            {{ post.content }}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

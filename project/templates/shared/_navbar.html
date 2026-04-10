@@ -1,6 +1,7 @@
 <nav class="navbar-container">
     <div>
-        <a class="navbar-link" href="{% url 'mainpage' %}">Home</a>
-        <a class="navbar-link" href="{% url 'secondpage' %}">Second page</a>
+        <a class="navbar-link" href="{% url 'main:mainpage' %}">Home</a>
+        <a class="navbar-link" href="{% url 'main:secondpage' %}">Second page</a>
+        <a class="navbar-link" href="{% url 'main:postpage' %}">Postpage</a>
     </div>
 </nav>
