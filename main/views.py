@@ -95,3 +95,13 @@ def detail(request, post_id):
 def edit(request, post_id):
     edit_post = get_object_or_404(Post, pk=post_id)
     return render(request, 'main/edit.html', {'post': edit_post})
+
+def update(request, post_id):
+    update_post = get_object_or_404(Post, pk=post_id)
+    update_post.title = request.POST['title']
+    update_post.writer = request.POST['writer']
+    update_post.content = request.POST['content']
+    update_post.category = request.POST['category']
+    update_post.save()
+    
+    return redirect('main:detail', update_post.id)

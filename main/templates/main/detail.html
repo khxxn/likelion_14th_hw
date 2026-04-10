@@ -22,7 +22,7 @@
         <div class="detail-body">
             {{ post.content }}
         </div>
-
+        <a href="{% url 'main:edit' post.id %}">수정</a>
     </div>
 </div>
 {% endblock %}
