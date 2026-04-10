@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="profile-card">
-
+    <a href="{% url 'main:new_post' %}">+ new post</a>
     <div class="card-grid">
         {% for post in posts %}
         <div class="info-box">

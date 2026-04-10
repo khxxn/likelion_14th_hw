@@ -4,7 +4,7 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     writer = models.CharField(max_length=30)
     content = models.TextField()
-    pub_date = models.DateTimeField()
+    pub_date = models.DateTimeField(auto_now_add=True)
     count = models.IntegerField(default=0)
     category = models.CharField(max_length=20, default='자유')
 

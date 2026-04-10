@@ -78,7 +78,6 @@ def create(request):
     new_post.title = request.POST['title']
     new_post.writer = request.POST['writer']
     new_post.content = request.POST['content']
-    new_post.pub_date = request.POST['pub_date']
     new_post.category = request.POST['category']
 
     new_post.save()
@@ -92,3 +91,7 @@ def postpage(request):
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     return render(request, 'main/detail.html', {'post': post})
+
+def edit(request, post_id):
+    edit_post = get_object_or_404(Post, pk=post_id)
+    return render(request, 'main/edit.html', {'post': edit_post})
