@@ -4,7 +4,7 @@
 <div class="profile-card">
     <h1 class="my-name">NEW POST</h1>
 
-    <form action="{% url 'main:create' %}" method="POST">
+    <form action="{% url 'main:update' post.id %}" method="POST">
         {% csrf_token %}
 
         <p>

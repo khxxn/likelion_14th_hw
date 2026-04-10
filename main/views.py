@@ -90,6 +90,10 @@ def postpage(request):
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
+
+    post.count+=1
+    post.save()
+
     return render(request, 'main/detail.html', {'post': post})
 
 def edit(request, post_id):
@@ -103,5 +107,11 @@ def update(request, post_id):
     update_post.content = request.POST['content']
     update_post.category = request.POST['category']
     update_post.save()
-    
+
     return redirect('main:detail', update_post.id)
+
+def delete(request, post_id):
+    delete_post = get_object_or_404(Post, pk=post_id)
+    delete_post.delete()
+
+    return redirect('main:postpage')

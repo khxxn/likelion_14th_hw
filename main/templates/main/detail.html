@@ -23,6 +23,7 @@
             {{ post.content }}
         </div>
         <a href="{% url 'main:edit' post.id %}">수정</a>
+        <a href="{% url 'main:delete' post.id %}">삭제</a>
     </div>
 </div>
 {% endblock %}
