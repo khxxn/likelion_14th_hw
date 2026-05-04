@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-card">
+
+    <div class="info-box">
+        <h1 class="my-name">로그인</h1>
+
+        <form action="{% url 'accounts:login' %}" method="POST">
+            {% csrf_token %}
+
+            <p>
+                <label for="username">아이디: </label>
+                <input type="text" id="username" name="username" required>
+            </p>
+
+            <p>
+                <label for="password">비밀번호: </label>
+                <input type="password" id="password" name="password" required>
+            </p>
+
+            <button type="submit">로그인</button>
+        </form>
+
+        <p>
+            아직 계정이 없으신가요? <a href="{% url 'accounts:signup' %}">회원가입</a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}

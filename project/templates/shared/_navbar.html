@@ -1,7 +1,20 @@
-<nav class="navbar-container">
+<nav class="navbar-container" style="display: flex; justify-content: space-between; width: 100%;">
+
     <div>
         <a class="navbar-link" href="{% url 'main:mainpage' %}">Home</a>
         <a class="navbar-link" href="{% url 'main:secondpage' %}">Second page</a>
         <a class="navbar-link" href="{% url 'main:postpage' %}">Postpage</a>
     </div>
+
+    <div style="margin-right: 100px;">
+        {% if user.is_authenticated %}
+        <span style="color: white; font-weight: bold; margin-right: 15px;">{{ user.username }}님 안녕하세요</span>
+        <a class="navbar-link" href="#">마이페이지</a>
+        <a class="navbar-link" href="{% url 'accounts:logout' %}">로그아웃</a>
+        {% else %}
+        <a class="navbar-link" href="{% url 'accounts:login' %}">로그인</a>
+        <a class="navbar-link" href="{% url 'accounts:signup' %}">회원가입</a>
+        {% endif %}
+    </div>
+
 </nav>

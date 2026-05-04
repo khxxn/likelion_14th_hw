@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+<script>
+    alert("{{ error }}");
+</script>
+{% endif %}
+<div class="profile-card">
+
+    <div class="info-box">
+        <h1 class="my-name">회원가입</h1>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <p>
+                <label for="username">아이디: </label>
+                <input type="text" id="username" name="username" required>
+            </p>
+
+            <p>
+                <label for="password">비밀번호: </label>
+                <input type="password" id="password" name="password" required>
+            </p>
+
+            <p>
+                <label for="password_confirm">비밀번호 확인: </label>
+                <input type="password" id="password_confirm" name="password_confirm" required>
+            </p>
+
+            <p>
+                <label for="nickname">닉네임: </label>
+                <input type="text" id="nickname" name="nickname" required>
+            </p>
+
+            <p>
+                <label for="major">전공: </label>
+                <input type="text" id="major" name="major" required>
+            </p>
+
+            <p>
+                <label for="insta">인스타 아이디: </label>
+                <input type="text" id="insta" name="insta">
+            </p>
+
+            <p>
+                <label for="profile_img">프로필 사진: </label>
+                <input type="file" id="profile_img" name="profile_img" accept="image/*">
+            </p>
+
+            <button type="submit">가입하기</button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
