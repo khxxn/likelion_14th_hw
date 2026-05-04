@@ -9,7 +9,7 @@
     <div style="margin-right: 100px;">
         {% if user.is_authenticated %}
         <span style="color: white; font-weight: bold; margin-right: 15px;">{{ user.username }}님 안녕하세요</span>
-        <a class="navbar-link" href="#">마이페이지</a>
+        <a class="navbar-link" href="{% url 'users:mypage' request.user.id %}">마이페이지</a>
         <a class="navbar-link" href="{% url 'accounts:logout' %}">로그아웃</a>
         {% else %}
         <a class="navbar-link" href="{% url 'accounts:login' %}">로그인</a>

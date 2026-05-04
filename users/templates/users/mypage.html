@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-card">
+    <div class="info-box">
+        <h1 class="my-name">마이페이지</h1>
+
+        <div style="text-align: center; margin-bottom: 20px;">
+            {% if user.profile.profile_image %}
+            <div class="profile-img-container">
+                <img src="{{ user.profile.profile_image.url }}" alt="프로필 사진" class="profile-img-show">
+            </div>
+            {% else %}
+            <div class="profile-img-container profile-img-none">
+                <span>사진 없음</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <div style="font-size: 18px; line-height: 2;">
+            <p><strong>아이디:</strong> {{ user.username }}</p>
+            <p><strong>닉네임:</strong> {{ user.profile.nickname }}</p>
+            <p><strong>전공:</strong> {{ user.profile.major }}</p>
+
+            <p><strong>인스타 아이디:</strong> {{ user.profile.insta|default:"미입력" }}</p>
+        </div>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+
+    </div>
+</div>
+{% endblock %}
