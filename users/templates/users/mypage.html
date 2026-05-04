@@ -20,7 +20,7 @@
         <div style="font-size: 18px; line-height: 2;">
             <p><strong>아이디:</strong> {{ user.username }}</p>
             <p><strong>닉네임:</strong> {{ user.profile.nickname }}</p>
-            <p><strong>전공:</strong> {{ user.profile.major }}</p>
+            <p><strong>전공:</strong> {{ user.profile.major|default:"미입력" }}</p>
 
             <p><strong>인스타 아이디:</strong> {{ user.profile.insta|default:"미입력" }}</p>
         </div>

@@ -11,6 +11,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .navbar-link {
@@ -101,8 +102,8 @@ li {
 }
 
 .profile-img-container {
-    width: 150px;
-    height: 150px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     margin: 0 auto;
     overflow: hidden;
