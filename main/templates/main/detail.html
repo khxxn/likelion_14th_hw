@@ -25,5 +25,31 @@
         <a href="{% url 'main:edit' post.id %}">수정</a>
         <a href="{% url 'main:delete' post.id %}">삭제</a>
     </div>
+    <div class="info-box">
+        <div class="info-title">
+            댓글 작성
+        </div>
+        <div class="comment-list">
+            {% for comment in comments %}
+            <div style="border-bottom: 1px solid #cccccc; padding: 10px 0;">
+                <strong>{{ comment.writer.profile.nickname }}</strong> : {{ comment.content }}
+                <br>
+                <small>{{ comment.pub_date }}</small>
+            </div>
+            {% empty %}
+            <p>아직 댓글이 없습니다.</p>
+            {% endfor %}
+        </div>
+
+        <br>
+
+        <div class="comment-form">
+            <form action="{% url 'main:detail' post.id %}" method="POST">
+                {% csrf_token %}
+                <textarea name="content" rows="3" style="width: 100%;" placeholder="댓글을 입력해주세요" required></textarea>
+                <button type="submit">댓글 등록</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

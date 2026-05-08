@@ -81,7 +81,7 @@ def create(request):
     
     new_post = Post()
     new_post.title = request.POST['title']
-    new_post.writer = request.user.username
+    new_post.writer = request.user
     new_post.content = request.POST['content']
     new_post.category = request.POST['category']
 
@@ -95,11 +95,22 @@ def postpage(request):
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
+    if request.method == 'POST' and request.user.is_authenticated:
 
+        new_comments = Comment()
+
+        new_comments.post = post
+        new_comments.writer = request.user
+        new_comments.content = request.POST['content']
+
+        new_comments.save()
+        return redirect('main:detail', post_id)
+    
     post.count+=1
     post.save()
-
-    return render(request, 'main/detail.html', {'post': post})
+    
+    comments = Comment.objects.filter(post=post)
+    return render(request, 'main/detail.html', {'post': post, 'comments': comments})
 
 def edit(request, post_id):
     if not request.user.is_authenticated:
@@ -107,7 +118,7 @@ def edit(request, post_id):
     
     edit_post = get_object_or_404(Post, pk=post_id)
 
-    if edit_post.writer != request.user.username:
+    if edit_post.writer != request.user:
         return redirect('main:detail', edit_post.id)
     
     return render(request, 'main/edit.html', {'post': edit_post})
@@ -118,11 +129,11 @@ def update(request, post_id):
     
     update_post = get_object_or_404(Post, pk=post_id)
 
-    if update_post.writer != request.user.username:
+    if update_post.writer != request.user:
         return redirect('main:detail', update_post.id)
     
     update_post.title = request.POST['title']
-    update_post.writer = request.user.username
+    update_post.writer = request.user
     update_post.content = request.POST['content']
     update_post.category = request.POST['category']
     update_post.save()
@@ -135,7 +146,7 @@ def delete(request, post_id):
     
     delete_post = get_object_or_404(Post, pk=post_id)
     
-    if delete_post.writer != request.user.username:
+    if delete_post.writer != request.user:
         return redirect('main:detail', delete_post.id)
     
     delete_post.delete()
