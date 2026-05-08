@@ -102,8 +102,11 @@ def detail(request, post_id):
         post.save()
         return redirect('main:detail', post_id)
         
-    if request.method == 'POST' and request.user.is_authenticated:
+    if request.method == 'POST':
 
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        
         new_comments = Comment()
 
         new_comments.post = post
@@ -164,9 +167,10 @@ def comment_update(request, comment_id):
         return redirect('accounts:login')
 
     update_comment = get_object_or_404(Comment, pk=comment_id)
+    post_id = update_comment.post.id
 
     if update_comment.writer != request.user:
-        return redirect('main:detail', update_comment.post.id)
+        return redirect('main:detail', post_id)
     
     update_comment.writer = request.user
     update_comment.content = request.POST['content']
