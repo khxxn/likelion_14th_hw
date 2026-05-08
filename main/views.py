@@ -95,6 +95,12 @@ def postpage(request):
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
+
+    if request.GET.get('flag') == 'True':
+        post.count += 1
+        post.save()
+        return redirect('main:detail', post_id)
+        
     if request.method == 'POST' and request.user.is_authenticated:
 
         new_comments = Comment()
@@ -105,9 +111,6 @@ def detail(request, post_id):
 
         new_comments.save()
         return redirect('main:detail', post_id)
-    
-    post.count+=1
-    post.save()
     
     comments = Comment.objects.filter(post=post)
     return render(request, 'main/detail.html', {'post': post, 'comments': comments})

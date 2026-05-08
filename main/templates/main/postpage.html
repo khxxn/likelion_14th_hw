@@ -14,7 +14,7 @@
 
             <div>
                 <p>{{ post.summary }}</p>
-                <a href="{% url 'main:detail' post.id %}">자세히 보기</a>
+                <a href="{% url 'main:detail' post.id %}?flag=True">자세히 보기</a>
             </div>
 
             <div class="detail-meta">
