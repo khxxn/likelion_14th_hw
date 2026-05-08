@@ -86,6 +86,7 @@ def create(request):
     new_post.category = request.POST['category']
 
     new_post.save()
+    save_tag(new_post)
     return redirect('main:detail', new_post.id)
 
 
@@ -141,6 +142,8 @@ def update(request, post_id):
     update_post.category = request.POST['category']
     update_post.save()
 
+    save_tag(update_post)
+
     return redirect('main:detail', update_post.id)
 
 def delete(request, post_id):
@@ -155,3 +158,53 @@ def delete(request, post_id):
     delete_post.delete()
 
     return redirect('main:postpage')
+
+def comment_update(request, comment_id):
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
+
+    update_comment = get_object_or_404(Comment, pk=comment_id)
+
+    if update_comment.writer != request.user:
+        return redirect('main:detail', update_comment.post.id)
+    
+    update_comment.writer = request.user
+    update_comment.content = request.POST['content']
+    update_comment.save()
+
+def comment_delete(request, comment_id):
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
+    
+    delete_comment = get_object_or_404(Comment, pk=comment_id)
+    post_id = delete_comment.post.id
+    
+    if delete_comment.writer != request.user:
+        return redirect('main:detail', post_id)
+    
+    delete_comment.delete()
+    return redirect('main:detail', post_id)
+
+def save_tag(post):
+    words = post.content.split()
+    tag_list = []
+
+    for w in words:
+        if len(w) > 0:
+            if w[0] == '#':
+                tag_list.append(w[1:])
+
+    post.tags.clear()
+
+    for t in tag_list:
+        tag, boolean = Tag.objects.get_or_create(name=t)
+        post.tags.add(tag)
+
+def tag_list(request):
+    tags = Tag.objects.all()
+    return render(request, 'main/tag_list.html', {'tags': tags})
+
+def tag_post_list(request, tag_id):
+    tag = get_object_or_404(Tag, pk=tag_id)
+    posts = tag.posts.all()
+    return render(request, 'main/tag_post_list.html', {'tag': tag, 'posts': posts})

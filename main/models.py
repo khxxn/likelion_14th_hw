@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Tag(models.Model):
+    name = models.CharField(max_length=30, null=False, blank=False)
+
 class Post(models.Model):
     title = models.CharField(max_length=50)
     writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
@@ -8,7 +11,8 @@ class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     count = models.IntegerField(default=0)
     category = models.CharField(max_length=20, default='자유')
-
+    tags = models.ManyToManyField(Tag, related_name='posts', blank=True)
+    
     def summary(self):
         return self.content[:20]
     

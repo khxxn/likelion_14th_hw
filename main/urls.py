@@ -5,8 +5,8 @@ from .views import *
 
 app_name = 'main'
 urlpatterns = [
-    path('', mainpage, name="mainpage"),
-    path('second', secondpage, name="secondpage"),
+    path('', mainpage, name='mainpage'),
+    path('second', secondpage, name='secondpage'),
     path('new_post', new_post, name='new_post'),
     path('create', create, name='create'),
     path('post', postpage, name='postpage'),
@@ -14,4 +14,8 @@ urlpatterns = [
     path('edit/<int:post_id>', edit, name='edit'),
     path('update/<int:post_id>', update, name='update'),
     path('delete/<int:post_id>', delete, name='delete'),
+    path('comment_update/<int:comment_id>', comment_update, name='comment_update'),
+    path('comment_delete/<int:comment_id>', comment_delete, name='comment_delete'),
+    path('tags', tag_list, name='tag_list'),
+    path('tags/<int:tag_id>', tag_post_list, name='tag_post_list'),
 ]

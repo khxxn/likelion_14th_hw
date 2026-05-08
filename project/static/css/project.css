@@ -122,3 +122,23 @@ li {
     background-color: #ddd;
     color: #666;
 }
+
+.tag-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tag-header-container h2 {
+    margin: 0;
+    color: #063acbcb;
+}
+
+.button-link {
+    text-decoration: none;
+    text-decoration: underline;
+}
+
+.button-link:hover {
+    box-shadow: 0 0.5em 0.5em -0.4em #063acbcb;
+}

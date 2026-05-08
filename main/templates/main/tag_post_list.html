@@ -2,8 +2,16 @@
 {% load static %}
 
 {% block content %}
+<div class="info-box">
+    <div class="tag-header-container">
+        <h2>#{{ tag.name }} 검색 결과</h2>
+        <a href="{% url 'main:tag_list' %}" class="detail-category button-link" style="font-weight: bold;">
+            ← 태그 목록으로
+        </a>
+    </div>
+</div>
+
 <div class="profile-card">
-    <a href="{% url 'main:new_post' %}">+ new post</a>
     <div class="card-grid">
         {% for post in posts %}
         <div class="info-box">
@@ -11,21 +19,21 @@
                 <span class="detail-category">[{{ post.category }}]</span>
                 {{ post.title }}
             </div>
-
             <div>
                 <p>{{ post.summary }}</p>
-                <a href="{% url 'main:detail' post.id %}?flag=True" class="detail-category button-link">자세히
-                    보기</a>
+                <a href="{% url 'main:detail' post.id %}?flag=True" class="detail-category button-link">자세히 보기</a>
             </div>
 
             <div class="detail-meta">
                 <span>작성자: {{ post.writer }}</span>
                 <span>조회수: {{ post.count }}</span>
             </div>
-
+        </div>
+        {% empty %}
+        <div class="info-box">
+            이 태그가 달린 게시글이 아직 없습니다.
         </div>
         {% endfor %}
     </div>
-
 </div>
 {% endblock %}

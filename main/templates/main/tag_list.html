@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="profile-card">
+    <div class="info-box">
+        <div class="info-title">
+            태그 목록
+        </div>
+        <div class="tag-grid">
+            {% for tag in tags %}
+            <a href="{% url 'main:tag_post_list' tag.id %}" class="detail-category button-link">
+                #{{ tag.name }}
+            </a>
+            {% empty %}
+            <p>등록된 태그가 없습니다.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
