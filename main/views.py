@@ -176,6 +176,8 @@ def comment_update(request, comment_id):
     update_comment.content = request.POST['content']
     update_comment.save()
 
+    return redirect('main:detail', post_id)
+
 def comment_delete(request, comment_id):
     if not request.user.is_authenticated:
         return redirect('accounts:login')

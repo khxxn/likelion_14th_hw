@@ -31,18 +31,31 @@
         <a href="{% url 'main:edit' post.id %}" class="detail-category button-link">수정</a>
         <a href="{% url 'main:delete' post.id %}" class="detail-category button-link">삭제</a>
     </div>
+
     <div class="info-box">
         <div class="info-title">
             댓글 작성
         </div>
         <div class="comment-list">
             {% for comment in comments %}
-            <div style="border-bottom: 1px solid #cccccc; padding: 10px 0;">
+            <div>
+                {% if request.GET.edit_id == comment.id|stringformat:"i" %}
+                <div class="comment-form">
+                    <form action="{% url 'main:comment_update' comment.id %}" method="POST">
+                        {% csrf_token %}
+                        <textarea name="content" rows="3" style="width: 100%;" required>{{ comment.content }}</textarea>
+                        <button type="submit">수정 완료</button>
+                        <a href="{% url 'main:detail' post.id %}" class="detail-category button-link">취소</a>
+                    </form>
+                </div>
+                {% else %}
                 <strong>{{ comment.writer.profile.nickname }}</strong> : {{ comment.content }}
                 <br>
                 <small>{{ comment.pub_date }}</small>
-                <a href="{% url 'main:comment_update' comment.id %}" class="detail-category button-link">수정</a>
+                <a href="{% url 'main:detail' post.id %}?edit_id={{ comment.id }}"
+                    class="detail-category button-link">수정</a>
                 <a href="{% url 'main:comment_delete' comment.id %}" class="detail-category button-link">삭제</a>
+                {% endif %}
             </div>
             {% empty %}
             <p>아직 댓글이 없습니다.</p>
