@@ -14,7 +14,9 @@
             <h1 class="detail-title">{{ post.title }}</h1>
 
             <div class="detail-meta">
-                <span>작성자: {{ post.writer }} | 날짜: {{ post.pub_date }}</span>
+                <span>작성자: <a href="{% url 'users:mypage' post.writer.id %}" class="detail-category button-link">
+                        {{ post.writer }}</a>
+                    | 날짜: {{ post.pub_date }}</span>
                 <span>조회수: {{ post.count }}</span>
             </div>
             <div class="detail-meta">
@@ -27,6 +29,16 @@
         </div>
         <div class="detail-body">
             {{ post.content }}
+        </div>
+        <div class="detail-likes">
+            <a href="{% url 'main:likes' post.id %}" class="detail-category button-link">
+                {% if user in post.like.all %}
+                취소
+                {% else %}
+                좋아요
+                {% endif %}
+            </a>
+            <span>{{ post.like_count }}개</span>
         </div>
         <a href="{% url 'main:edit' post.id %}" class="detail-category button-link">수정</a>
         <a href="{% url 'main:delete' post.id %}" class="detail-category button-link">삭제</a>

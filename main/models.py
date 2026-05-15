@@ -12,7 +12,9 @@ class Post(models.Model):
     count = models.IntegerField(default=0)
     category = models.CharField(max_length=20, default='자유')
     tags = models.ManyToManyField(Tag, related_name='posts', blank=True)
-    
+    like = models.ManyToManyField(User, related_name='likes', blank=True)
+    like_count = models.PositiveIntegerField(default=0)
+
     def summary(self):
         return self.content[:20]
     
