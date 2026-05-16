@@ -216,6 +216,9 @@ def tag_post_list(request, tag_id):
     return render(request, 'main/tag_post_list.html', {'tag': tag, 'posts': posts})
 
 def likes(request, post_id):
+
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
  
     post = get_object_or_404(Post, pk=post_id)
 
@@ -229,3 +232,21 @@ def likes(request, post_id):
         post.save()
 
     return redirect('main:detail', post.id)
+
+def comment_likes(request, comment_id):
+
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
+
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if request.user in comment.like.all():
+        comment.like.remove(request.user)
+        comment.like_count -= 1
+        comment.save()
+    else:
+        comment.like.add(request.user)
+        comment.like_count += 1
+        comment.save()
+
+    return redirect('main:detail', comment.post.id)

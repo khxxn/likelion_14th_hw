@@ -64,6 +64,15 @@
                 <strong>{{ comment.writer.profile.nickname }}</strong> : {{ comment.content }}
                 <br>
                 <small>{{ comment.pub_date }}</small>
+                <a href="{% url 'main:comment_likes' comment.id %}" class="detail-category button-link">
+                    {% if user in comment.like.all %}
+                    취소
+                    {% else %}
+                    좋아요
+                    {% endif %}
+                </a>
+                <span>{{ comment.like_count }}개</span>
+                <br>
                 <a href="{% url 'main:detail' post.id %}?edit_id={{ comment.id }}"
                     class="detail-category button-link">수정</a>
                 <a href="{% url 'main:comment_delete' comment.id %}" class="detail-category button-link">삭제</a>

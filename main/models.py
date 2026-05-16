@@ -23,6 +23,8 @@ class Comment(models.Model):
     writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     content = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
+    like = models.ManyToManyField(User, related_name='comment_likes', blank=True)
+    like_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.post.title}: {self.content[:20]} by {self.writer.profile.nickname}"
